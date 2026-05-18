@@ -634,6 +634,10 @@ namespace fs
 	// Get common cache directory
 	const std::string& get_cache_dir();
 
+#ifdef ANDROID
+	void set_android_paths(std::string executable_dir, std::string config_dir, std::string cache_dir);
+#endif
+
 	// Get common log directory
 	const std::string& get_log_dir();
 

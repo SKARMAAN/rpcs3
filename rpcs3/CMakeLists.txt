@@ -38,6 +38,10 @@ if (NOT ANDROID)
     add_subdirectory(rpcs3qt)
 endif()
 
+if (ANDROID)
+    add_subdirectory(android)
+endif()
+
 gen_git_version(${CMAKE_CURRENT_SOURCE_DIR})
 
 if (NOT ANDROID)
