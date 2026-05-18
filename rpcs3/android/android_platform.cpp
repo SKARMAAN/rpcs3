@@ -27,17 +27,20 @@ namespace rpcs3::android
 	{
 		std::lock_guard lock(g_window_mutex);
 
+		if (g_window == window)
+		{
+			g_window_width = width;
+			g_window_height = height;
+			g_window_refresh_rate = refresh_rate;
+			return;
+		}
+
 		if (g_window)
 		{
 			ANativeWindow_release(g_window);
 		}
 
 		g_window = window;
-
-		if (g_window)
-		{
-			ANativeWindow_acquire(g_window);
-		}
 
 		g_window_width = width;
 		g_window_height = height;

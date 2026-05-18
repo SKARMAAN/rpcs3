@@ -195,10 +195,10 @@ namespace rpcs3::android
 
 	bool initialize(std::string_view user_id)
 	{
-		const std::string resolved_user = user_id.empty() ? "00000001" : std::string(user_id);
+		const std::string resolved_user_id = user_id.empty() ? "00000001" : std::string(user_id);
 
 		Emu.SetHasGui(true);
-		Emu.SetUsr(resolved_user);
+		Emu.SetUsr(resolved_user_id);
 		Emu.Init();
 
 		set_callbacks();

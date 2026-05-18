@@ -54,11 +54,6 @@ extern "C"
 	{
 		ANativeWindow* window = surface ? ANativeWindow_fromSurface(env, surface) : nullptr;
 		rpcs3::android::set_window(window, width, height, refresh_rate);
-
-		if (window)
-		{
-			ANativeWindow_release(window);
-		}
 	}
 
 	JNIEXPORT void JNICALL JNI_OnUnload(JavaVM*, void*)
