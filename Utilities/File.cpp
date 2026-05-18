@@ -18,6 +18,22 @@ using namespace std::literals::string_literals;
 std::string g_android_executable_dir;
 std::string g_android_config_dir;
 std::string g_android_cache_dir;
+
+static std::string ensure_trailing_slash(std::string path)
+{
+	if (!path.empty() && path.back() != '/')
+	{
+		path.push_back('/');
+	}
+	return path;
+}
+
+void fs::set_android_paths(std::string executable_dir, std::string config_dir, std::string cache_dir)
+{
+	g_android_executable_dir = ensure_trailing_slash(std::move(executable_dir));
+	g_android_config_dir = ensure_trailing_slash(std::move(config_dir));
+	g_android_cache_dir = ensure_trailing_slash(std::move(cache_dir));
+}
 #endif
 
 #ifdef _WIN32

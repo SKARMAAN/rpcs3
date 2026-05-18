@@ -101,6 +101,22 @@ sudo apt-get install cmake
 
     sudo zypper install git cmake ninja libasound2 libpulse-devel openal-soft-devel glew-devel zlib-devel libedit-devel vulkan-devel libudev-devel libqt6-qtbase-devel libqt6-qtmultimedia-devel libqt6-qtsvg-devel libQt6Gui-private-headers-devel libevdev-devel libsndio7_1 libjack-devel
 
+### Android (experimental)
+
+Building the core library for Android is experimental. You need the Android NDK (r26+) and CMake 3.28+.
+
+Example build (arm64-v8a):
+
+```
+cmake -S . -B build-android -G Ninja \
+  -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK/build/cmake/android.toolchain.cmake \
+  -DANDROID_ABI=arm64-v8a -DANDROID_PLATFORM=android-26 -DANDROID_STL=c++_shared \
+  -DUSE_NATIVE_INSTRUCTIONS=OFF
+cmake --build build-android
+```
+
+The build outputs `librpcs3_android.so` in the build directory.
+
 ## Setup the project
 
 Clone and initialize the repository
