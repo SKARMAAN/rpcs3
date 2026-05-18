@@ -25,25 +25,19 @@ namespace rpcs3::android
 
 	void set_window(ANativeWindow* window, int width, int height, float refresh_rate)
 	{
-		ANativeWindow* acquired_window = window;
-		if (acquired_window)
-		{
-			ANativeWindow_acquire(acquired_window);
-		}
-
 		std::lock_guard lock(g_window_mutex);
 
 		if (g_window == window)
 		{
-			if (acquired_window)
-			{
-				ANativeWindow_release(acquired_window);
-			}
-
 			g_window_width = width;
 			g_window_height = height;
 			g_window_refresh_rate = refresh_rate;
 			return;
+		}
+
+		if (window)
+		{
+			ANativeWindow_acquire(window);
 		}
 
 		if (g_window)
@@ -51,7 +45,7 @@ namespace rpcs3::android
 			ANativeWindow_release(g_window);
 		}
 
-		g_window = acquired_window;
+		g_window = window;
 
 		g_window_width = width;
 		g_window_height = height;
